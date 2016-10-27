@@ -1,71 +1,101 @@
-  $(document).ready(function(){ //start of JQuery
-  //Defining all the variables:
-  var userScore = 0;
+$(document).ready(function() {
 
-  var valueRed
+//Global varibales
+var win = 0;
+var loss = 0;
+var cpuNumber = 0;
+var valueRed = 0;
+var valueBlue = 0;
+var valueYellow = 0;
+var valueGreen = 0;
+var userScore = 0;
 
-  var valueBlue
+//generate random numbers 
+function randomNumber(min,max){
+	return Math.floor(Math.random() *(max - min + 1) + min);
+};
 
-  var valueYellow
+//reset game function
+function reset() {
+ 	cpuNumber = 0;
+ 	valueRed = 0;
+ 	valueBlue = 0;
+ 	valueYellow = 0;
+	valueGreen = 0;
+	userScore = 0;
+	$('#yourScore').text(0);
+	startGame();
+};
 
-  var valueGreen
-  // Defining the variable which generates the Random Number
-  var randomNumber = 19 + Math.floor(Math.random() * 102);
-    console.log(randomNumber);
-  //Defining the variable with the random value of first crystal
-  var valueOne = 1 + Math.floor(Math.random() * 12);
-    console.log(valueOne);
-  //Defining the variable with the random value of second crystal
-  var valueTwo = 1 + Math.floor(Math.random() * 12);
-    console.log(valueTwo);
-  //Defining the variable with the random value of third crystal
-  var valueThree = 1 + Math.floor(Math.random() * 12);
-    console.log(valueThree);
-  //Defining the variable with the random value of fourth crystal
-  var valueFour = 1 + Math.floor(Math.random() * 12);
-    console.log(valueFour);
+//compare score function
+function checkScore() {
+	if (userScore == cpuNumber) {
+	win++;
+	$('#yourWins').text(win);
+	reset();
+	};
 
-  //Printing random number to its Div
-  $('#randomNo').html(randomNumber);
-  //Printing User Score to its Div
-  $('#yourScore').html(userScore);
+	if (userScore > cpuNumber) {
+		loss++;
+		$('#yourLosses').text(loss);
+		reset();
+	};
+};
 
-  //On the click of red crystal, assign the random valueOne to it
-  $('#red')
-  .click(function() {
-    var valueRed = valueOne;
-    console.log(valueRed);
-    $('#yourScore').append(valueRed);
-  });//append the value to be added later
+//start game
+function startGame(){
+	//computer choose random number
+		var numb1 = randomNumber(19,120);
+		cpuNumber = numb1;
+		$('#randomNo').text(cpuNumber);
 
-  //On the click of blue crystal, assign the random valueTwo to it
-   $('#blue')
-  .click(function() {
-    var valueBlue = valueTwo;
-    console.log(valueBlue);
-    $('#yourScore').append(valueBlue);
-  });//append the value to be added later
+	//diamond 1 choosen
+		var numb2 = randomNumber(1,12);
+		valueRed = numb2;
 
-  //On the click of yellow crystal, assign the random valueThree to it
-   $('#yellow')
-  .click(function() {
-    var valueYellow = valueThree;
-    console.log(valueYellow);
-    $('#yourScore').append(valueYellow);
-  });//append the value to be added later
+	//diamond 2 choosen
+		var numb3 = randomNumber(1,12);
+		valueBlue = numb3;
 
-  //On the click of green crystal, assign the random valueFour to it
-  $('#green')
-  .click(function() {
-    var valueGreen = valueFour;
-    console.log(valueGreen);
-    $('#yourScore').append(valueGreen);
-  });//append the value to be added later
+	//diamond 3 choosen
+		var numb4 = randomNumber(1,12);
+		valueYellow = numb4;
 
-  //NOW HOW DO I ADD ALL VALUES IN ORDER TO BUILD THE USER SCORE? GOT STUCK HERE.
+	//diamond 4 choosen
+		var numb5 = randomNumber(1,12);
+		valueGreen = numb5;
 
+}
 
-})
+//click diamond 1
+$("#red").click(function(){
+	userScore += valueRed;
+	$('#yourScore').text(userScore);
+	checkScore();
+});
 
+//click diamond 2
+$("#blue").click(function(){
+	userScore += valueBlue;
+	$('#yourScore').text(userScore);
+	checkScore();
+});
 
+//click diamond 3 
+$("#yellow").click(function(){
+	userScore += valueYellow;
+	$('#yourScore').text(userScore);
+	checkScore();
+});
+
+//click diamond 4
+$("#green").click(function(){
+	userScore += valueGreen;
+	$('#yourScore').text(userScore);
+	checkScore();
+});
+
+startGame();
+
+});
 

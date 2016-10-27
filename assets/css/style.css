@@ -21,3 +21,15 @@ p {
 	text-align: center;
 
 }
+
+#yourWins {
+	font-size: 50px;
+	text-align: center;
+
+}
+
+#yourLosses {
+	font-size: 50px;
+	text-align: center;
+
+}
