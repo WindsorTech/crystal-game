@@ -65,6 +65,8 @@ function startGame(){
 		var numb5 = randomNumber(1,12);
 		valueGreen = numb5;
 
+		debugger;
+
 }
 
 //click diamond 1
